@@ -14,4 +14,6 @@ Route::post('/register',[RegisteredUserController::class,'store']);
 Route::get('/login',[SessionsController::class,'create']);
 Route::post('/login',[SessionsController::class,'store']);
 
-Route::delete('/logout',[SessionsController::class,'destroy']);
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [RegisteredUserController::class, 'delete'])->name('logout');
+});

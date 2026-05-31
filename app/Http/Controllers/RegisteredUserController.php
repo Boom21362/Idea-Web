@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 
 class RegisteredUserController extends Controller
@@ -30,5 +33,10 @@ class RegisteredUserController extends Controller
 
         return redirect('/')->with('success','You have been registered successfully');
 
+    }
+
+    public function delete(){
+        Auth::logout();
+        return redirect('/')->with('success','You have been logged out successfully');
     }
 }
