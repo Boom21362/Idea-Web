@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+
+class SessionsController extends Controller
+{
+    public function create(){
+        return view('auth.login');
+    }
+
+    public function store(Request $request){
+        $attributes = $request->validate([
+            'email' => ['required','string','email','max:255'],
+            'password' => ['required','string','min:8','max:255'],
+        ]);
+
+        if(!Auth::attempt($attributes)){
+            return back()->withErrors(['password'=>"Email or password is incorrect",'email'=>"Email or password is incorrect",])
+                ->withInput();
+        }
+
+        $request->session()->regenerate();
+        return redirect()->intended('/')->with('success','You are now logged in');
+
+    }
+
+    public function destroy()
+    {
+        Auth::logout();
+
+        return redirect('/');
+    }
+}
