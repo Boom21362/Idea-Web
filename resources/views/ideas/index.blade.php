@@ -71,10 +71,10 @@
     </div>
 
     <x-layout.models name="create-idea" title="New Idea">
-        <form x-data="{status:'pending'}" action="{{ route('ideas.store') }}" method="post" class="space-y-4">
+        <form x-data="{status:'pending', title: '', description: ''}" @open-modal.window="status = 'pending'; title = ''; description = ''" action="{{ route('ideas.store') }}" method="post" class="space-y-4">
             @csrf
             <div class="space-y-6">
-                <x-form.field title="Title" name="title" placeholder="Your title" autofocus required/>
+                <x-form.field x-model="title" title="Title" name="title" placeholder="Your title" autofocus required/>
 
                 <div class="space-y-2">
                     <label for="status" class="label font-bold">Status</label>
@@ -105,7 +105,7 @@
                     <x-form.error name="status"></x-form.error>
                 </div>
 
-                <x-form.field title="Description" name="description" type="textarea" placeholder="Describe your idea..." autofocus/>
+                <x-form.field x-model="description" title="Description" name="description" type="textarea" placeholder="Describe your idea..." autofocus/>
 
                 <div class="flex justify-end gap-x-5">
                     <button type="button" @click="$dispatch('close-modal')">Cancel</button>
