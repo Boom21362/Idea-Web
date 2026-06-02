@@ -1,6 +1,7 @@
 <nav class="border-b border-border px-6">
     <div class="max-w-7x1 mx-auto h-16 flex items-center justify-between">
-        <div>
+        <div class="flex items-center font-bold">
+                <x-icons.idea-logo/>
                 <a href="/">Ideas</a>
         </div>
         @guest

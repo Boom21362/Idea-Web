@@ -11,6 +11,7 @@ Route::redirect('/', '/ideas');
 
 Route::get('/ideas', [IdeaController::class, 'index'])->name('ideas.index')->middleware('auth');
 Route::get('/ideas/{idea}', [IdeaController::class, 'show'])->name('ideas.show')->middleware('auth');
+Route::delete('/ideas/{idea}', [IdeaController::class, 'destory'])->name('ideas.destory')->middleware('auth');
 
 Route::get('/register', [RegisteredUserController::class, 'create'])->middleware('guest');
 Route::post('/register', [RegisteredUserController::class, 'store'])->middleware('guest');
