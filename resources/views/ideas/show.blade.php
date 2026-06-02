@@ -9,7 +9,7 @@
 
             <div class="gap-x-3 flex items-center">
                 <button class="btn btn-outlined text-yellow-300">Edit Idea</button>
-                <form action="{{route('ideas.destory',$idea)}}" method="post">
+                <form action="{{route('ideas.destroy',$idea)}}" method="post">
                     @csrf
                     @method('DELETE')
         

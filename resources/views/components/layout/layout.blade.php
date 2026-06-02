@@ -19,13 +19,13 @@
         x-init="setTimeout(()->show = false,3000)"
         x-show="show"
         x-transition.opacity.duration.1000ms
-        class="bg-primary px-4 py-3 absolute bottom-4 right-4 rounded-lg"
+        class="fixed bg-primary px-4 py-3 absolute bottom-4 right-4 rounded-lg "
     >
         Test for now :)
     </div>
 
     @session('success')
-        <div class="bg-primary px-4 py-3 absolute bottom-4 right-4 rounded-lg">{{ $value }}</div>
+        <div class="fixed bg-primary px-4 py-3 absolute bottom-4 right-4 rounded-lg">{{ $value }}</div>
     @endsession
 
 </body>
