@@ -1,7 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\Idea;
-use App\Models\Step;
 use App\Models\User;
 
 test('idea belongs to a user', function () {
@@ -9,7 +10,6 @@ test('idea belongs to a user', function () {
 
     expect($idea->user)->toBeInstanceOf(User::class);
 });
-
 
 test('idea can have steps', function () {
     $idea = Idea::factory()->create();

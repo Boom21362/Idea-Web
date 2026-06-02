@@ -1,19 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Browser;
 
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 
 class RegisterTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
     // ⚠️ CRUCIAL: The method name MUST start with the word "test"
-    public function test_register_aa_user()
+    public function test_register_aa_user(): void
     {
-        $email = 'johnny' . rand(1, 999) . '@gmail.com';
+        $email = 'johnny'.random_int(1, 999).'@gmail.com';
 
         $this->browse(function (Browser $browser) use ($email) {
             $browser->visit('/register')

@@ -1,6 +1,10 @@
 <?php
 
-pest()->extend(\Tests\Browser\DuskTestCase::class)
+declare(strict_types=1);
+
+use Tests\Browser\DuskTestCase;
+
+pest()->extend(DuskTestCase::class)
 //  ->use(Illuminate\Foundation\Testing\DatabaseMigrations::class)
     ->in('Browser');
 
@@ -19,7 +23,7 @@ use Tests\TestCase;
 */
 
 pest()->extend(TestCase::class)->use(RefreshDatabase::class)
-    ->in('Browser','Unit');
+    ->in('Browser', 'Unit');
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +36,7 @@ pest()->extend(TestCase::class)->use(RefreshDatabase::class)
 |
 */
 
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
-});
+expect()->extend('toBeOne', fn () => $this->toBe(1));
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +49,7 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function something(): void
 {
     // ..
 }

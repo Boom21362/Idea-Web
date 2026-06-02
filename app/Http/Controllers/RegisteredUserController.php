@@ -1,26 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 
 class RegisteredUserController extends Controller
 {
-    public function create(){
+    public function create()
+    {
         return view('auth.register');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         $request->validate([
-            'name' => ['required','string','max:255','min:3'],
-            'email' => ['required','string','email','max:255',Rule::unique('users','email')],
-            'password' => ['required','string','min:8','max:255'],
+            'name' => ['required', 'string', 'max:255', 'min:3'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')],
+            'password' => ['required', 'string', 'min:8', 'max:255'],
         ]);
 
         $user = User::create([
@@ -31,12 +34,14 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect('/')->with('success','You have been registered successfully');
+        return redirect('/')->with('success', 'You have been registered successfully');
 
     }
 
-    public function delete(){
+    public function delete()
+    {
         Auth::logout();
-        return redirect('/')->with('success','You have been logged out successfully');
+
+        return redirect('/')->with('success', 'You have been logged out successfully');
     }
 }
