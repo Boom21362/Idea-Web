@@ -3,6 +3,12 @@
     <header class="py-8 md:py-12">
         <h1 class="text-3xl font-bold">Ideas</h1>
         <p class="text-muted-foreground text-sm mt-2">Capture your thoughts. Make a Plan</p>
+
+        <x-layout.card 
+            x-data @click="$dispatch('open-modal','create-idea')"
+            is="button" class="mt-10 cursor-pointer h-32 w-full text-left"> 
+            <p>What's the idea?</p>
+        </x-layout.card>
     </header>
 
     <details class="group border border-border rounded-lg bg-card w-full max-w-60 transition-all duration-300">
@@ -68,5 +74,25 @@
         </div>
     </div>
 
+    <!-- modal -->
+
+    <div x-data="{show:false,name:'create-idea'}" 
+        x-show="show" 
+        @open-modal.window="show = true"
+        @keydown.escape.window="show = false"
+        x-transition:enter="ease-out duration-200"
+        x-transition:enter-start="opacity-0 -translate-y-4 -translate-x-4"
+        x-transition:leave="ease-in duration-150"
+        x-transition:leave-end="opacity-0 -translate-y-4 -translate-x-4"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs"
+        style="display: none">
+        <x-layout.card @click.away="show = false">
+            <p>I am a modal!</p>
+        </x-layout.card>
+    </div>
+
 </x-layout>
+
+
+
 

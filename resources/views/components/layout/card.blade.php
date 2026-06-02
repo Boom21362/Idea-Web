@@ -1,3 +1,5 @@
-<a {{ $attributes(['class'=>'border border-border rounded-lg bg-card p-4 md:text-sm block cursor-pointer'])}}>
+@props(['is'=>'a'])
+
+<{{$is}} {{ $attributes(['class'=>'border border-border rounded-lg bg-card p-4 md:text-sm block cursor-pointer'])}}>
             {{ $slot }}
-</a>
+<{{$is}}>
