@@ -5,7 +5,7 @@
 
 <x-form.field name="email" type="email" title="Email"></x-form.field>
 
-<x-form.field name="password" t ype="password" title="Pasword"></x-form.field>
+<x-form.field name="password" type="password" title="Password"></x-form.field>
 
 <button type="submit" class="btn mt-2 h-10 font-bold w-full ">LogIn</button>
 </form>
