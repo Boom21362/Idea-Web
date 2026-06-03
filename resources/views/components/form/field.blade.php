@@ -1,4 +1,4 @@
-@props(['title'=> false ,'name', 'type'=>'text', 'title'])
+@props(['name', 'type'=>'text', 'title'])
 
 <div class="space-y-2">
     @if($title)

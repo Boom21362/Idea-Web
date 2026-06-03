@@ -5,7 +5,9 @@
 
         <x-layout.card 
             x-data @click="$dispatch('open-modal', 'create-idea')"
-            is="button" class="mt-10 cursor-pointer h-32 w-full text-left"> 
+            is="button" class="mt-10 cursor-pointer h-32 w-full text-left"
+            data-test ="create-idea-button"
+            > 
             <p>What's the idea?</p>
         </x-layout.card>
     </header>
@@ -93,6 +95,7 @@
 
                             <button type="button" 
                                     @click="status = @js($status->value)" 
+                                    data-test ="button-status-{{$status->value}}}"
                                     class="btn flex-1 h-10 transition-all duration-200 font-medium rounded-lg border"
                                     :class="status === @js($status->value) ? @js($colorClass) : 'btn-outlined text-muted-foreground bg-transparent border-border hover:bg-slate-100/10'"
                             >

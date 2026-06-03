@@ -2,12 +2,6 @@
 
 declare(strict_types=1);
 
-use Tests\Browser\DuskTestCase;
-
-pest()->extend(DuskTestCase::class)
-//  ->use(Illuminate\Foundation\Testing\DatabaseMigrations::class)
-    ->in('Browser');
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,7 +17,7 @@ use Tests\TestCase;
 */
 
 pest()->extend(TestCase::class)->use(RefreshDatabase::class)
-    ->in('Browser', 'Unit');
+    ->in('Feature', 'Unit');
 
 /*
 |--------------------------------------------------------------------------
