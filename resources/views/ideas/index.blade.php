@@ -1,13 +1,15 @@
-<x-layout>
+<x-layout.layout>
     <header class="py-8 md:py-12">
         <h1 class="text-3xl font-bold">Ideas</h1>
         <p class="text-muted-foreground text-sm mt-2">Capture your thoughts. Make a Plan</p>
 
         <x-layout.card 
-            x-data @click="$dispatch('open-modal', 'create-idea')"
-            is="button" class="mt-10 cursor-pointer h-32 w-full text-left"
-            data-test ="create-idea-button"
-            > 
+            x-data 
+            @click="$dispatch('open-modal', 'create-idea')"
+            is="button" 
+            class="mt-10 cursor-pointer h-32 w-full text-left"
+            data-test="create-idea-button"
+        > 
             <p>What's the idea?</p>
         </x-layout.card>
     </header>
@@ -73,7 +75,11 @@
     </div>
 
     <x-layout.models name="create-idea" title="New Idea">
-        <form x-data="{status:'pending', title: '', description: ''}" @open-modal.window="status = 'pending'; title = ''; description = ''" action="{{ route('ideas.store') }}" method="post" class="space-y-4">
+        <form x-data="{
+        status:'pending',
+        newLink:'',
+        links:[]
+        , title: '', description: ''}" @open-modal.window="status = 'pending'; title = ''; description = ''" action="{{ route('ideas.store') }}" method="post" class="space-y-4">
             @csrf
             <div class="space-y-6">
                 <x-form.field x-model="title" title="Title" name="title" placeholder="Your title" autofocus required/>
@@ -109,13 +115,39 @@
                 </div>
 
                 <x-form.field x-model="description" title="Description" name="description" type="textarea" placeholder="Describe your idea..." autofocus/>
+                
+                <fieldset class="space-y-3">
+                    <legend class="label">Links</legend>
 
-                <div class="flex justify-end gap-x-5">
+                    <template x-for = "(link,index) in links" :key="link">
+                        <div class="flex gap-x-2 items-center">
+                        <input name="links[]" x-model="link" class="input">
+
+                        <button type="button" @click="links.splice(index,1); newLink='';"
+                        aria-label="Remove Links">
+                        <span class="form-muted-icon">x</span>
+                        </button>
+                        </div>
+                    </template>
+                <div class="flex gap-x-2 items-center">
+                    <input type="url" id="newLink" x-model="newLink"
+                    placeholder="http://example.com"
+                    autocomplete="url"
+                    class="input flex-1"
+                    spellcheck="false"
+                    >
+                    <button type="button" @click="links.push(newLink.trim()); newLink='';"
+                    :disabled="newLink.trim().length === 0" aria-label="Add a new link">
+                        <span class="form-muted-icon font-bold  ">+</span>
+                    </button>
+                </div>  
+            </fieldset>
+            </div>
+            <div class="flex justify-end gap-x-5">
                     <button type="button" @click="$dispatch('close-modal')">Cancel</button>
                     <button type="submit" class="btn">Create</button>
                 </div>
             
-            </div>
         </form>
     </x-layout.models>
-</x-layout>
+</x-layout.layout>
